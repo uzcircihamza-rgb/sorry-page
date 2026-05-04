@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>❤️ Özür Dilerim 💕</title>
+    <title>🌼 Beyzam'a Mektup 💕</title>
     <style>
         * {
             margin: 0;
@@ -19,178 +19,433 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            overflow-x: hidden;
         }
         
-        .container {
+        .page1, .page2, .page3, .page4 {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            min-height: 100vh;
+        }
+        
+        .page1.active, .page2.active, .page3.active, .page4.active {
+            display: flex;
+        }
+        
+        .cover, .letter, .question, .thank-you {
             background: white;
             border-radius: 30px;
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
-            max-width: 650px;
-            padding: 70px 50px;
+            max-width: 700px;
+            padding: 80px 50px;
             text-align: center;
-            animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: slideUp 0.8s ease-out;
         }
         
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .heart {
-            font-size: 100px;
-            margin-bottom: 30px;
-            animation: heartbeat 1.4s infinite;
-            display: inline-block;
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         @keyframes heartbeat {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+            50% { transform: scale(1.15); }
         }
         
-        h1 {
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes leoparWalk {
+            0% {
+                left: -100px;
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                left: 120%;
+                opacity: 0;
+            }
+        }
+        
+        @keyframes leoparFloatIn {
+            0% {
+                transform: translateY(100px) scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .daisy-heart {
+            font-size: 120px;
+            margin-bottom: 30px;
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        h1, h2 {
             color: #764ba2;
-            font-size: 3em;
-            margin-bottom: 15px;
             font-weight: 800;
         }
         
-        .message {
-            color: #555;
-            font-size: 1.15em;
-            line-height: 2;
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        
+        h2 {
+            font-size: 2.8em;
+            margin-bottom: 50px;
+        }
+        
+        .cover p {
+            color: #999;
+            font-size: 1.1em;
+            margin-bottom: 50px;
+            font-style: italic;
+        }
+        
+        .letter-header {
             margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
         }
         
-        .reason {
-            background: #f8f9fa;
-            border-left: 6px solid #764ba2;
-            padding: 30px;
-            margin: 40px 0;
+        .letter-header h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .daisy-line {
+            font-size: 30px;
+            margin: 10px 0;
+        }
+        
+        .letter-content {
             text-align: left;
-            border-radius: 15px;
-            color: #666;
+            color: #555;
+            font-size: 1.05em;
+            line-height: 2.2;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 1;
         }
         
-        .buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 50px;
-            flex-wrap: wrap;
+        .letter-content p {
+            margin-bottom: 20px;
+            font-weight: 500;
         }
         
-        button {
-            padding: 18px 40px;
+        .letter-content strong {
+            color: #764ba2;
+        }
+        
+        .letter, .thank-you {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .daisy-left, .daisy-right, .daisy-top-left, .daisy-top-right, .daisy-bottom-left, .daisy-bottom-right {
+            position: absolute;
+            font-size: 60px;
+            opacity: 0.6;
+        }
+        
+        .daisy-left { left: -20px; top: 20px; }
+        .daisy-right { right: -20px; bottom: 20px; }
+        
+        .daisy-top-left { left: 20px; top: 20px; font-size: 80px; animation: float 3s ease-in-out infinite; }
+        .daisy-top-right { right: 20px; top: 20px; font-size: 80px; animation: float 3s ease-in-out infinite 0.5s; }
+        .daisy-bottom-left { left: 30px; bottom: 30px; font-size: 80px; animation: float 3s ease-in-out infinite 1s; }
+        .daisy-bottom-right { right: 30px; bottom: 30px; font-size: 80px; animation: float 3s ease-in-out infinite 1.5s; }
+        
+        .letter-footer, .thank-you-content {
+            margin-top: 60px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .signature {
+            color: #764ba2;
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .heart-signature, .thank-you-heart, .final-heart {
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        .thank-you-heart {
+            font-size: 120px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        .thank-you-message {
+            color: #555;
+            font-size: 1.2em;
+            margin-bottom: 50px;
+            line-height: 2;
+            font-weight: 600;
+        }
+        
+        .forever {
+            color: #764ba2;
+            font-size: 1.3em;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+        
+        .hamza-sign {
+            color: #e91e63;
+            font-size: 2em;
+            font-weight: 800;
+        }
+        
+        .final-heart {
+            font-size: 50px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        
+        .leopar-container {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            height: 150px;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        .leopar {
+            position: absolute;
+            bottom: 0;
+            font-size: 80px;
+            animation: leoparWalk 8s infinite ease-in-out;
+        }
+        
+        .leopar-1 {
+            animation-delay: 0s;
+        }
+        
+        .leopar-2 {
+            animation-delay: 3s;
+            animation-duration: 7s;
+        }
+        
+        .leopar-3 {
+            animation-delay: 5s;
+            animation-duration: 9s;
+        }
+        
+        .leopar-float {
+            animation: leoparFloatIn 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .open-button, .next-button, .btn-yes, .btn-no {
+            padding: 18px 50px;
             font-size: 1.1em;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             font-weight: 700;
             transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
         
-        .btn-yes {
+        .open-button, .next-button, .btn-yes {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            flex: 1;
-            min-width: 180px;
-        }
-        
-        .btn-yes:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(118, 75, 162, 0.5);
         }
         
         .btn-no {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
-            flex: 1;
-            min-width: 180px;
         }
         
-        .btn-no:hover {
+        .open-button:hover, .next-button:hover, .btn-yes:hover, .btn-no:hover {
             transform: translateY(-5px);
         }
         
-        .signature {
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 2px solid #f0f0f0;
-            color: #764ba2;
-            font-weight: 600;
+        .buttons-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-yes, .btn-no {
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .question-heart {
+            font-size: 100px;
+            margin-bottom: 30px;
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        @media (max-width: 600px) {
+            .cover, .letter, .question, .thank-you {
+                padding: 50px 30px;
+            }
+            
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.8em; }
+            
+            .buttons-group {
+                flex-direction: column;
+            }
+            
+            .btn-yes, .btn-no {
+                width: 100%;
+            }
+            
+            .leopar {
+                font-size: 60px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="heart">❤️</div>
-        <h1>Özür Dilerim</h1>
-        
-        <div class="message">
-            <p>Yaptığım hataları biliyorum ve çok pişmanım.</p>
-            <p>Seninle barışmak istiyorum çünkü sen benim hayatımın en önemli insısın.</p>
+    <div class="page1 active">
+        <div class="cover">
+            <div class="daisy-heart">🌼❤️🌼</div>
+            <h1>Mektubumu Aç</h1>
+            <p>Sana söyleyeceklerim var...</p>
+            <p style="color: #ccc; font-size: 0.9em;">Lütfen bir dakikanı ayır 💕</p>
+            <button class="open-button" onclick="showPage(2)">📩 MEKTUBU AÇ</button>
         </div>
-        
-        <div class="reason">
-            <strong>💭 Neden?</strong>
-            <p style="margin-top: 15px;">Hatalarımdan ders aldım ve daha iyi bir insan olmak istiyorum. Seninle bu durumu aşmak ve birlikte ilerlemek istiyorum. Sen benim için çok değerlisin!</p>
+    </div>
+    
+    <div class="page2">
+        <div class="letter">
+            <div class="daisy-left">🌼</div>
+            <div class="daisy-right">🌼</div>
+            
+            <div class="letter-header">
+                <h2>Sevgili Beyzam</h2>
+                <div class="daisy-line">🌼 💕 🌼</div>
+            </div>
+            
+            <div class="letter-content">
+                <p>Bana dinleme şansı verdiğin için çok teşekkür ederim. Bunu yazmakta zorlanıyorum ama senin bana verdiği değer karşısında sessiz kalamadım.</p>
+                
+                <p><strong>Seni kırdığım için çok özür dilerim.</strong> Her söz, her hareket, her karar seni incittiğinde kalp atışlarım duruyor. Hatalarımı fark ettim ve bundan çok acı çekiyorum.</p>
+                
+                <p>Seninle geçirdiğim her an, senin gülüşün, senin güzelliğin, senin kalp saflığın bana hayat verdikçe, seni incitmekten bile nefret ediyorum.</p>
+                
+                <p>Eğer affedebilirsen, ben hiçbir zaman seni tekrar üzmeyeceğimi söz veriyorum. <strong>Seninle daha güzel, daha güvenli ve daha sevgili bir gelecek kurmak istiyorum.</strong></p>
+                
+                <p>Lütfen bana bir şans ver. Seni kaybetmek, benim hayatımın en büyük korkusu. Çünkü sen sadece benim sevgilim değilsin, sen benim hayatım, benim nefesim, benim her şeyim.</p>
+                
+                <p>🌼 Sonsuz pişmanlık ve aşk ile 🌼</p>
+            </div>
+            
+            <div class="letter-footer">
+                <div class="signature">Hamza <span class="heart-signature">❤️</span></div>
+                <button class="next-button" onclick="showPage(3)">Devam Et ➜</button>
+            </div>
+            
+            <div class="leopar-container">
+                <div class="leopar leopar-1">🐆</div>
+                <div class="leopar leopar-2">🐆</div>
+                <div class="leopar leopar-3">🐆</div>
+            </div>
         </div>
-        
-        <div class="buttons">
-            <button class="btn-yes" onclick="handleYes()">💕 AFFEDEBILIR MİSİN?</button>
-            <button class="btn-no" onclick="handleNo()">🥺 BİRAZ DÜŞÜN</button>
+    </div>
+    
+    <div class="page3">
+        <div class="question">
+            <div class="question-heart">💕</div>
+            <h2>Beni Affedebilir Misin?</h2>
+            
+            <div class="buttons-group">
+                <button class="btn-yes" onclick="affettin()">✨ Evet, Affettim</button>
+                <button class="btn-no" onclick="handleNo()">😔 Hayır</button>
+            </div>
         </div>
-        
-        <div class="signature">
-            <p>❤️ Seni çok seviyorum ❤️</p>
+    </div>
+    
+    <div class="page4">
+        <div class="thank-you">
+            <div class="daisy-top-left">🌼</div>
+            <div class="daisy-top-right">🌼</div>
+            <div class="daisy-bottom-left">🌼</div>
+            <div class="daisy-bottom-right">🌼</div>
+            
+            <div class="thank-you-content">
+                <div class="thank-you-heart leopar-float">🐆</div>
+                <h2>Teşekkür Ederim</h2>
+                <p class="thank-you-message"><strong>Beyzam</strong> 💕</p>
+                <div class="forever">∞ Sonsuza Kadar Senin ∞</div>
+                <div class="hamza-sign">Hamza</div>
+                <div class="final-heart">❤️🐆❤️</div>
+            </div>
         </div>
     </div>
     
     <script>
-        function handleYes() {
-            alert('🎉 YAŞASIN! Çok sevindim! ❤️\n\nSeninle her şey daha güzel.');
+        function showPage(num) {
+            document.querySelectorAll('div[class^="page"]').forEach(p => p.classList.remove('active'));
+            document.querySelector('.page' + num).classList.add('active');
+        }
+        
+        function affettin() {
+            showPage(4);
             createConfetti();
         }
         
         function handleNo() {
-            alert('🥺 Lütfen bana bir şans ver...\n\nSeninle her şey daha iyi olacak!');
+            alert('🥺 Lütfen bana bir şans ver...\n\nSeninle her şey daha güzel olacak! 💕');
         }
         
         function createConfetti() {
-            for (let i = 0; i < 80; i++) {
+            for (let i = 0; i < 100; i++) {
                 const confetti = document.createElement('div');
                 confetti.style.position = 'fixed';
                 confetti.style.left = Math.random() * window.innerWidth + 'px';
-                confetti.style.top = '-20px';
-                confetti.style.fontSize = Math.random() * 30 + 20 + 'px';
+                confetti.style.top = '-30px';
+                confetti.style.fontSize = Math.random() * 30 + 25 + 'px';
                 confetti.style.pointerEvents = 'none';
-                confetti.style.zIndex = '10000';
+                confetti.style.zIndex = '9999';
+                confetti.style.opacity = '1';
                 
-                const emojis = ['❤️', '💕', '💖', '✨', '🎉'];
+                const emojis = ['❤️', '💕', '💖', '✨', '🎉', '🌼', '💑', '🐆'];
                 confetti.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
                 document.body.appendChild(confetti);
                 
-                let top = -20;
-                const speed = Math.random() * 4 + 3;
+                let top = -30;
+                const speed = Math.random() * 5 + 3;
                 const left = parseFloat(confetti.style.left);
+                const swayAmount = Math.random() * 200 - 100;
+                const rotation = Math.random() * 360;
                 
                 const animation = setInterval(() => {
                     top += speed;
                     confetti.style.top = top + 'px';
+                    confetti.style.left = (left + Math.sin(top / 50) * swayAmount) + 'px';
                     confetti.style.opacity = Math.max(0, 1 - (top / window.innerHeight));
+                    confetti.style.transform = `rotate(${rotation + top}deg)`;
                     
                     if (top > window.innerHeight) {
                         clearInterval(animation);
                         confetti.remove();
                     }
-                }, 30);
+                }, 25);
             }
         }
     </script>
